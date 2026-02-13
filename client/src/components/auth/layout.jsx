@@ -6,8 +6,9 @@ function AuthLayout() {
     <div className="flex min-h-screen w-full">
       {/* Left - branding */}
       <div className="hidden md:flex w-1/2 items-center justify-center bg-gradient-to-br from-brandPink via-brandSky to-sky-200 px-12">
-        <div className="bg-white/10 backdrop-blur-sm px-6 py-4 rounded-2xl">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-center text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.65)]">
+        {/* Remove the semi-opaque box around the heading so the text sits directly on the gradient */}
+        <div className="px-6 py-4">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-center text-white">
             Welcome to ECommerce Shopping
           </h1>
         </div>

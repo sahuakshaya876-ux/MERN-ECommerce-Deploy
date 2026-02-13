@@ -22,13 +22,6 @@ const commonFeatureRouter=require("./routes/common/feature-routes");
 //create a database connection -> u can also
 //create a separate file for this and then import/use that file here
 
-mongoose
-  .connect(
-    process.env.MONGO_URL
-  )
-  .then(()=>console.log("MongoDB connected"))
-  .catch((error)=>console.log(error));
-
 
 const app=express();
 const PORT=process.env.PORT || 5000;
@@ -65,7 +58,21 @@ app.use("/api/shop/review",shopReviewRouter);
 app.use("/api/common/feature",commonFeatureRouter);
 
 
-app.listen(PORT,()=>console.log(`Server is now running the port ${PORT}`));
+app.get("/", (req, res) => {
+  res.send("MERN Backend Running 🚀");
+});
+
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    console.log("MongoDB connected");
+    app.listen(PORT, () =>
+      console.log(`Server running on port ${PORT}`)
+    );
+  })
+  .catch((error) => {
+    console.error("MongoDB connection failed:", error);
+  });
 
 
 
