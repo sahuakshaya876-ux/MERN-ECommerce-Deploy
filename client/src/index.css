@@ -1,0 +1,37 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+	/* subtle smooth default font and background treatment */
+	html, body, #root {
+		height: 100%;
+	}
+	body {
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+}
+
+@layer components {
+	.btn-primary {
+		@apply bg-primary-500 text-white px-4 py-2 rounded-md shadow-soft hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-300;
+	}
+
+		/* Add-to-cart specific button: black background, white text for high contrast */
+		.btn-add {
+			@apply bg-black text-white px-4 py-2 rounded-md shadow-soft hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500;
+		}
+
+	.card-soft {
+		@apply bg-white/80 rounded-lg p-4 shadow-soft border border-white/60;
+	}
+}
+
+
+
+
+
