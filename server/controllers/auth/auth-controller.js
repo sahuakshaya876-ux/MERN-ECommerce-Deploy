@@ -123,7 +123,7 @@ const loginUser = async (req, res) => {
     return res
       .cookie("token", token, {
         httpOnly: true,
-        secure: false, // true in production (HTTPS)
+        secure: true, // true in production (HTTPS)
         sameSite: "lax",
       })
       .json({
