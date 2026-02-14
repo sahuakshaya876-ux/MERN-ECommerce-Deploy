@@ -38,6 +38,57 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
+/*const authMiddleware = (req, res, next) => {
+  try {
+    // token stored in httpOnly cookie
+    const authHeader=req.headers['authorization'];
+    // DEBUG: log incoming authorization header (masked)
+    if (authHeader) {
+      try {
+        const masked = authHeader.replace(/(Bearer\s+)(.{6}).+(.{6})$/, "$1$2...$3");
+        console.debug("[authMiddleware] Authorization header:", masked);
+      } catch (e) {
+        console.debug("[authMiddleware] Authorization header present");
+      }
+    } else {
+      console.debug("[authMiddleware] No Authorization header present");
+    }
+
+    const token=authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized user! No token provided",
+      });
+    }
+
+    // verify token
+    let decoded;
+    try {
+      decoded = jwt.verify(token, "CLIENT_SECRET_KEY");
+    } catch (err) {
+      console.error("[authMiddleware] jwt.verify error:", err && err.message);
+      throw err;
+    }
+
+    // attach user to request
+    req.user = {
+      _id: decoded._id,
+      email: decoded.email,
+      role: decoded.role,
+      userName: decoded.userName,
+    };
+
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized user! Invalid or expired token",
+    });
+  }
+};
+*/
 /* =========================
    REGISTER
 ========================= */
@@ -137,6 +188,19 @@ const loginUser = async (req, res) => {
           userName: checkUser.userName,
         },
       });
+
+      /*res.status(200).json({
+        success:true,
+        message:"Logged in successfully",
+        token,
+        user: {
+          id: checkUser._id,
+          email: checkUser.email,
+          role: checkUser.role,
+          userName: checkUser.userName,
+        },
+      })*/
+
   } catch (e) {
     console.log("LOGIN ERROR:", e);
     return res.status(500).json({

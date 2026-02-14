@@ -17,7 +17,7 @@ import {
   DropdownMenuItem,
 } from "../ui/dropdown-menu";
 
-import { logoutUser } from "@/store/auth-slice";
+import { logoutUser} from "@/store/auth-slice";
 import UserCartWrapper from "./cart-wrapper";
 import { useEffect, useState } from "react";
 
